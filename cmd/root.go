@@ -38,10 +38,9 @@ var cfgFile string
 var rootCmd = &cobra.Command{
 	Use:   AppName,
 	Short: "Short description application",
-	Long: fmt.Sprintf(`A longer description application. For example:
-
-%s can do helpful function to calculate complex problem.
-This application is using cobra cli.`, AppName),
+	Long: fmt.Sprintf(`Default configuration will be read at $HOME/.%s.env directory.
+Use parameter --config <filename> for the configuration. For example:
+$ %s --config ./.env`, AppName, AppName),
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
 	// Run: func(cmd *cobra.Command, args []string) {},

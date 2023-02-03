@@ -29,19 +29,22 @@ import (
 	"github.com/spf13/viper"
 )
 
+// change your app name here
+const AppName = "console_app"
+
 var cfgFile string
 
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
-	Use:   "console_app",
+	Use:   AppName,
 	Short: "Short description application",
-	Long: `A longer description application. For example:
+	Long: fmt.Sprintf(`A longer description application. For example:
 
-Console app can do helpful function to calculate complex problem.
-This application is using cobra cli.`,
+%s can do helpful function to calculate complex problem.
+This application is using cobra cli.`, AppName),
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) { },
+	// Run: func(cmd *cobra.Command, args []string) {},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -60,7 +63,7 @@ func init() {
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
 
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.console_app.yaml)")
+	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", fmt.Sprintf("config file (default is $HOME/.%s.env)", AppName))
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.
@@ -71,6 +74,7 @@ func init() {
 func initConfig() {
 	if cfgFile != "" {
 		// Use config file from the flag.
+		viper.SetConfigType("env")
 		viper.SetConfigFile(cfgFile)
 	} else {
 		// Find home directory.
@@ -79,8 +83,8 @@ func initConfig() {
 
 		// Search config in home directory with name ".console_app" (without extension).
 		viper.AddConfigPath(home)
-		viper.SetConfigType("yaml")
-		viper.SetConfigName(".console_app")
+		viper.SetConfigType("env")
+		viper.SetConfigName(fmt.Sprintf(".%s", AppName))
 	}
 
 	viper.AutomaticEnv() // read in environment variables that match

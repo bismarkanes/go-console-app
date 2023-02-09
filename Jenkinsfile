@@ -5,6 +5,10 @@ pipeline {
         }
     }
 
+    triggers {
+        pollSCM 'H/5 * * * *'
+    }
+
     options {
         timestamps()
     }
@@ -12,11 +16,13 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                checkout scmGit(
-                    branches: [[name: '*/develop']],
-                    extensions: [],
-                    userRemoteConfigs: [[url: 'https://github.com/bismarkanes/go-console-app']]
-                )
+                script {
+                    checkout scmGit(
+                        branches: [[name: '*/develop']],
+                        extensions: [],
+                        userRemoteConfigs: [[url: 'https://github.com/bismarkanes/go-console-app']]
+                    )
+                }
             }
         }
     }

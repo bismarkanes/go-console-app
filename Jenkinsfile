@@ -1,4 +1,10 @@
 pipeline {
+    agent {
+        node {
+            'agent'
+        }
+    }
+
     options {
         timestamps()
     }

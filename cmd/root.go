@@ -39,11 +39,14 @@ var rootCmd = &cobra.Command{
 	Use:   AppName,
 	Short: "Short description application",
 	Long: fmt.Sprintf(`Default configuration will be read at $HOME/.%s.env directory.
-Use parameter --config <filename> for the configuration. For example:
+Use parameter --config <filename> override location of the configuration file.
+For example:
 $ %s --config ./.env`, AppName, AppName),
 	// Uncomment the following line if your bare application
 	// has an action associated with it:
-	// Run: func(cmd *cobra.Command, args []string) {},
+	Run: func(cmd *cobra.Command, args []string) {
+		fmt.Println("Your first command")
+	},
 }
 
 // Execute adds all child commands to the root command and sets flags appropriately.
@@ -62,7 +65,7 @@ func init() {
 	// Cobra supports persistent flags, which, if defined here,
 	// will be global for your application.
 
-	rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", fmt.Sprintf("config file (default is $HOME/.%s.env)", AppName))
+	rootCmd.PersistentFlags().StringVarP(&cfgFile, "config", "c", "", fmt.Sprintf("config file (default is $HOME/.%s.env)", AppName))
 
 	// Cobra also supports local flags, which will only run
 	// when this action is called directly.

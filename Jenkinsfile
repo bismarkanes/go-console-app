@@ -1,7 +1,7 @@
 pipeline {
     agent {
         node {
-            'agent'
+            label 'agent'
         }
     }
 

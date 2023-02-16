@@ -1,9 +1,9 @@
 pipeline {
-    agent {
-        node {
-            label 'backend'
-        }
-    }
+    // agent {
+    //     node {
+    //         label 'backend'
+    //     }
+    // }
 
     triggers {
         pollSCM 'H/2 * * * *'

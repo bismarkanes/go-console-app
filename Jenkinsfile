@@ -19,8 +19,8 @@ pipeline {
                 script {
                     checkout scmGit(
                         branches: [[name: '*/develop']],
-                        extensions: [],
-                        userRemoteConfigs: [[url: 'https://github.com/bismarkanes/go-console-app']]
+                        extensions: scm.extensions,
+                        userRemoteConfigs: scm.userRemoteConfigs
                     )
                 }
             }
